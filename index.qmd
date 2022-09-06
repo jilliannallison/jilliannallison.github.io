@@ -1,11 +1,15 @@
 ---
 title: "Jillian Allison"
+image: IMG_1514.jpg
+about: 
+  template: trestles
+  image-shape: rounded
+  image-width: 15em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/jilliannallison/
+    - text: GitHub
+      href: https://github.com/jilliannallison
+    - text: Email
+      href: mailto:jilliannallison@ucsb.edu
 ---
-
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
