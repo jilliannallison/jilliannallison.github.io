@@ -13,3 +13,17 @@ about:
     - text: Email
       href: mailto:jilliannallison@ucsb.edu
 ---
+
+## Education
+
+**Master of Environmental Data Science** (2023) \| Bren School of Environmental Science & Management \| University of California, Santa Barbara
+
+**B.S. Earth Science- Geohydrology Emphasis** (2022) \| University of California, Santa Barbara
+
+### Experience
+
+**Stream Team Intern** (January 2022 - September 2022) \| Santa Barbara Channelkeeper \| Santa Barbara, California
+
+**Water Quality Specialist** (June 2022 - September 2022) \| Valley Water \| San Jose, California
+
+**Water Quality Intern** (January 2020 - November 2020) \| Cheadle Center for Biodiversity and Ecological Restoration \| Goleta, California

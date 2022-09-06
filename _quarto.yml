@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "jilliannallison.github.io"
+  title: " "
   navbar:
     left:
       - href: index.qmd
@@ -12,9 +12,8 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: litera
     css: styles.css
-    toc: true
 
 editor: visual
 
