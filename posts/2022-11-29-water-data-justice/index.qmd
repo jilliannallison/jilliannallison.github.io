@@ -39,7 +39,7 @@ Without reliable, long-term environmental data, it is difficult to study long te
 
 Thanks to the Clean Water Act, water quality data comprises some of the United States' most reliable environmental datasets, but water quality is still impacted by temporal and geographic data gaps. 
 
-#### Case Study: Nitrogen Data
+#### Case Study: Nitrogen Data 
 
 In *Closing the Environmental Data Gap* ^4^, Robin O'Malley et al. provide a case study on nitrogen pollution, demonstrating the impacts of insufficient environmental data. Nitrogen is released into the environment by fossil fuels, fertilizers, and sewage. Nitrogen in runoff leads to well-documented coastal dead zones, and can cause health problems for children if present in drinking water. There are vast geographic gaps in nitrogen pollution data, making it difficult to mitigate the effects of this pollution, and to quantify measures of success in this mitigation. If we are not able to quantify nitrogen pollution and the environmental parameters it affects, how can we craft policy to create positive change in an increasingly data-driven world? How will we know if our policy change has been effective without reliable, widespread environmental data? 
 
@@ -56,7 +56,7 @@ Contrary to popular belief, CS can be a very reliable source of data. The vast m
 \
 That being said, Citizen Science does not solve all of our environmental data issues. Depending on the scale, CS does not always resolve the need for large-scale, cohesive datasets. CS also raises issues of equity; it is a privilege to have free time and resources to volunteer as a citizen scientist. 
 
-#### Case Study: The Santa Barbara Channelkeeper
+#### Case Study: The Santa Barbara Channelkeeper 
 
 The Santa Barbara Channelkeeper's (SBCK) Stream Team Program^6^ on California's Central Coast is one successful example of citizen science in water quality data collection. Volunteers, accompanied by trained staff, measure key water quality parameters in dozens of streams in the Santa Barbara area. Local government agencies regularly use this data to inform policy decisions. This data has been used to identify pollution hot spots, which SBCK and local governments collaboratively restored. 
 
