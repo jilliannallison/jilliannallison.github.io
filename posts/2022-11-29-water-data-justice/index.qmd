@@ -10,7 +10,7 @@ date: 2022-11-29
 categories: [MEDS, Environmental Data Justice]
 citation: 
   url: https://jilliannallison.github.io/posts/2022-11-29-water-data-justice
-draft: false 
+draft: true
 ---
 
 #### Introduction
