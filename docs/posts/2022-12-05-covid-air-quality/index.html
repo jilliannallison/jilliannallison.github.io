@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jillian Allison">
+<meta name="dcterms.date" content="2022-12-05">
+<meta name="description" content="Examining the relationship between PM 2.5, COVID-19 mortality rates, and poverty rates across 52 counties in California">
+
+<title>- Air Quality and COVID-19 Mortality in California</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"></span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">My Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Air Quality and COVID-19 Mortality in California</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">MEDS</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Examining the relationship between PM 2.5, COVID-19 mortality rates, and poverty rates across 52 counties in California
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <a href="https://jilliannallison.github.io">Jillian Allison</a> 
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            <a href="https://ucsb-meds.github.io/">
+            MEDS
+            </a>
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 5, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Air pollution is now considered the largest environmental health threat. Of all of the common pollutants, PM<sub>2.5</sub> has an especially severe impact on human health due to it’s ability to affect both the respiratory and vascular systems<span class="citation" data-cites="airpoll">(<a href="#ref-airpoll" role="doc-biblioref"><span>“Air Pollution and Health,”</span> n.d.</a>)</span>. PM<sub>2.5</sub> is mainly produced by the combustion of fuels and wood. Exposure to PM<sub>2.5</sub> can exacerbate heart and lung diseases, which are both known risk factors for negative outcomes from COVID-19<span class="citation" data-cites="kinney2008">(<a href="#ref-kinney2008" role="doc-biblioref">Kinney 2008</a>)</span>.</p>
+<p>A 2020 study on county-level COVID-19 mortality across the United States found a statistically significant relationship between air pollution exposure and COVID-19 death rates. This study provided strong evidence for area-level determinants of negative health outcomes. While this cannot inform individual outcomes, this research can be used to inform policy decisions in the United States.<span class="citation" data-cites="wu2020">(<a href="#ref-wu2020" role="doc-biblioref">Wu 2020a</a>)</span></p>
+<p>As wildfires become more frequent in the west, Californians are exposed to much higher levels of pollutants, specifically PM<sub>2.5.</sub> This places Californians at a now greater risk for negative health outcomes from respiratory illness. In this project, I will study the effects of PM<sub>2.5</sub> exposure on COVID-19 mortality across 52 counties in California in 2020. This will help us understand what areas are at the greatest risk for negative health outcomes, therefore informing resource allocations and preparation plans for future pandemics.</p>
+</section>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="covid-19-data" class="level4">
+<h4 class="anchored" data-anchor-id="covid-19-data">COVID-19 Data</h4>
+<p>I accessed COVID-19 data from the California Open Data Portal, specifically the <a href="https://data.ca.gov/dataset/covid-19-time-series-metrics-by-county-and-state">COVID-19 Time-Series Metrics by County and State.</a> This source provides daily county-level counts on cases, deaths, and tests from February 1, 2020 to present. The data comes from the California COVID-19 Dashboard, which provides the most comprehensive data on reported COVID-19 cases in California. That being said, many COVID-19 cases went unreported (asymptomatic cases, cases without a positive test) and thus would not be included in this data set.</p>
+</section>
+<section id="air-quality-data" class="level4">
+<h4 class="anchored" data-anchor-id="air-quality-data">Air Quality Data</h4>
+<p>I accessed air quality data from the <a href="https://www.epa.gov/outdoor-air-quality-data/download-daily-data">US EPA Outdoor Air Quality Data</a> portal. This source provides air quality data from Air Quality System (AQS) and AirNow (when AQS data is not available). AQS tracks data from thousands of monitors across the United States. It provides Daily Mean PM2.5 Concentrations and Daily AQI Values from each monitor. Within California, there are 151 unique air monitoring stations across 52 counties in California- not every county has an air quality monitoring station.</p>
+</section>
+<section id="poverty-data" class="level4">
+<h4 class="anchored" data-anchor-id="poverty-data">Poverty Data</h4>
+<p>I accessed poverty data from the United States Census Bureau on <a href="https://data.census.gov/table?q=poverty+in+california+in+2020&amp;g=0400000US06$0500000&amp;tid=ACSST5Y2020.S1701">Poverty Status in the Past 12 Months in 2020.</a> This data is the most comprehensive data available on poverty rates at the county level in California. The data set provides 5-year estimates on poverty status by age, race, education, and employment.</p>
+</section>
+</section>
+<section id="analysis" class="level2">
+<h2 class="anchored" data-anchor-id="analysis">Analysis</h2>
+<p>I will start by fitting a linear regression model for COVID-19 mortality with a single predictor indicating the county’s 6-year mean PM<sub>2.5</sub> concentrations to examine the relationship between PM<sub>2.5</sub> and COVID-19 mortality on a county-level scale.</p>
+<p><span class="math display">\[Deaths_i =\beta_{0}+\beta_{1} \cdot PM2.5_i+\varepsilon_i\]</span></p>
+<p>For the values for COVID-19 mortality, I’m choosing to study cumulative deaths in 2020 as a percent of cumulative cases in 2020 in each county: (Cumulative Deaths / Cumulative Cases) * 100%. This allows us to compare COVID-19 mortality rates in counties with varying populations. Since this data is from 2020, I assume that members of the population being studied are not vaccinated against COVID-19. I will remove two outliers: Inyo County and Alpine County. Inyo County had extremely high COVID mortality (~3%), and Alpine County had extremely low COVID mortality (0%).</p>
+<p>For the PM<sub>2.5</sub> values, I will be using the average of the daily PM<sub>2.5</sub> values between February 2020 and December 2020. The county PM<sub>2.5</sub> values are the averages of all stations in that county.</p>
+<p>This linear regression model with a single predictor does not account for the numerous other influences on COVID-19 mortality and air quality, so we cannot draw strong conclusions from this basic model.</p>
+<p>One obvious confounding variable in this analysis is poverty. To account for this, I will also perform a multiple linear regression with interactions.</p>
+<p><span class="math display">\[Deaths_i=\beta_{0}+\beta_{1} \cdot Poverty_i + \beta_{2} \cdot PM2.5_i + \beta_{3} \cdot Poverty_i \cdot PM2.5_i + \varepsilon_i\]</span></p>
+<p>Since poverty is likely to impact both COVID-19 mortality and one’s exposure to poor air quality, I will include poverty in this model. The poverty values are county-scale poverty rates (%).</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="models" class="level3">
+<h3 class="anchored" data-anchor-id="models">Models</h3>
+<p><strong>Simple Linear Regression Model</strong> <span class="math display">\[Deaths_i =\beta_{0}+\beta_{1} \cdot PM2.5_i+\varepsilon_i\]</span></p>
+<p><strong>Interaction Model</strong> <span class="math display">\[Deaths_i=\beta_{0}+\beta_{1} \cdot Poverty_i + \beta_{2} \cdot PM2.5_i + \beta_{3} \cdot Poverty_i \cdot PM2.5_i + \varepsilon_i\]</span></p>
+</section>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+</section>
+<section id="plots" class="level3">
+<h3 class="anchored" data-anchor-id="plots">Plots</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="scatter_deaths_pm2.5.png" class="img-fluid figure-img" width="696"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Plot of COVID-19 deaths as a percent of cases (cumulative) and long term average daily PM 2.5 values from 2015-2020 in California. Inyo and Alpine County (outliers) were removed. Points are labeled by county. The coral line represents the linear regression model described above. We can see a positive correlation between average daily PM 2.5 and cumulative deaths as a percent of cumulative cases, but there are high residuals.</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="scatter_pm_deaths_poverty.png" class="img-fluid figure-img" width="697"></p>
+<p></p><figcaption class="figure-caption">Figure 2: Plot of COVID-19 deaths as a percent of cases (cumulative) and long term average daily PM 2.5 values from 2015-2020 in California. Color indicates the poverty level in each county- red points are counties with high poverty levels, blue points are counties with low poverty levels, and purple points are counties with intermediate poverty levels. Inyo and Alpine County (outliers) were removed. The blue line represents the simple linear regression model described in the section above.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="residuals" class="level3">
+<h3 class="anchored" data-anchor-id="residuals">Residuals</h3>
+<p><strong>Simple Linear Regression Model</strong></p>
+<table class="table">
+<caption>Table: Residuals (From Simple Linear Regression Model)</caption>
+<thead>
+<tr class="header">
+<th>Min</th>
+<th>Q1</th>
+<th>Median</th>
+<th>Q3</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-0.91711</td>
+<td>-0.20024</td>
+<td>-0.02783</td>
+<td>0.20909</td>
+<td>1.07737</td>
+</tr>
+</tbody>
+</table>
+<p>The median value suggests that the model generally predicts slightly lower values for COVID-19 deaths as a percent of cases than observed (-0.02783%). The relatively large maximum and minimum values indicate that some observed values are more than a full percent off from the model (1.07737%).</p>
+<p><strong>Interaction Model</strong></p>
+<table class="table">
+<caption>Table: Residuals (From Interaction Model)</caption>
+<thead>
+<tr class="header">
+<th>Min</th>
+<th>Q1</th>
+<th>Median</th>
+<th>Q3</th>
+<th>Max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-0.88871</td>
+<td>-0.24042</td>
+<td>-0.02951</td>
+<td>0.15008</td>
+<td>1.13647</td>
+</tr>
+</tbody>
+</table>
+<p>The median value suggests that the model generally predicts slightly lower values for COVID-19 deaths as a percent of cases than observed (-0.02951%). The relatively large maximum and minimum values indicate that some observed values are a full percent off from the model (1.13647%).</p>
+</section>
+<section id="coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="coefficients">Coefficients</h3>
+<p><strong>Simple Linear Regression lm() Output</strong></p>
+<p><img src="lmodel_tabmodel.png" class="img-fluid" width="356"></p>
+<p>The intercept 0.87 states that, according to this model, if PM2.5 was 0, we would expect cumulative deaths in 2020 to be 0.87% of cumulative cases in 2020 on average.</p>
+<p>According to this model, for every 1 microgram / m<sup>3</sup> increase in PM2.5, we would expect cumulative deaths as a percent of cumulative cases in 2020 to increase by 0.03%. This value is relatively low, indicating that changes in PM2.5 have a small effect on COVID-19 mortality on the county scale.</p>
+<p><strong>Interaction Model lm() Output</strong></p>
+<p><img src="intmodel_tabmodel.png" class="img-fluid" width="356"></p>
+<p>The intercept 0.87 states that, according to this model, if the PM2.5 concentration and the poverty rate were both 0, we would expect cumulative deaths in 2020 to be 0.89% of cumulative cases in 2020 on average.</p>
+<p>According to this model, for every 1 microgram / m<sup>3</sup> increase in PM2.5, when the poverty rate is 0%, we would expect cumulative deaths as a percent of cumulative cases in 2020 to neither increase nor decrease. This value indicates that changes in PM2.5 have little effect on COVID-19 mortality on the county scale.</p>
+<p>Additionally, for every 1% increase in the poverty rate when PM2.5 is 0 micrograms / m<sup>3</sup>, we expect cumulative deaths as a percent of cumulative cases in 2020 to increase by 0.01%. This indicates that increases in poverty rates slightly increase COVID-19 mortality rates on the county scale.</p>
+<p>The effect of PM2.5 on COVID-19 mortality increases by 0.001% for every percent increase in poverty rates (not shown in table due to rounding). This indicates that on this scale, PM2.5 and poverty rates have minimal interaction.</p>
+</section>
+<section id="the-p-value" class="level3">
+<h3 class="anchored" data-anchor-id="the-p-value">The p-value</h3>
+<p>The p-value is an indication of the likelihood that the coefficient estimates from our model differ from 0 purely by chance. A low p-value would indicate that there is a low chance that we would see our estimated coefficient value if the true value of that coefficient was 0. If the p-value is below 0.05, we can reject the null hypothesis: air quality (and poverty for our second model) have no effect on COVID-19 mortality.</p>
+<p><strong>Simple Linear Regression Model</strong></p>
+<p>The p-value for our simple linear regression model was 0.2189. Since this is greater than 0.05, we fail to reject our null hypothesis. Using this model, there is not sufficient evidence to conclude that there is a relationship between particulate matter and COVID-19 mortality.</p>
+<p><strong>Interaction Model</strong></p>
+<p>The p-value for our interaction model was 0.333, Since this is greater than 0.05, we fail to reject our null hypothesis. Using this model, there is not sufficient evidence to conclude that there is a relationship between particulate matter, poverty, and COVID-19 mortality.</p>
+</section>
+<section id="r-squared" class="level3">
+<h3 class="anchored" data-anchor-id="r-squared">R-Squared</h3>
+<p><strong>Simple Linear Regression Model</strong></p>
+<p>The Multiple R-Squared value for this model was 0.03132. This indicates that this model does not fit the data very well.</p>
+<p><strong>Interaction Model</strong></p>
+<p>The Adjusted R-Squared value for this model was 0.01006. This indicates that this model does not fit the data very well.</p>
+</section>
+<section id="confidence-interval" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-interval">Confidence Interval</h3>
+<p>When the sampling distribution of a point estimate can be modeled as normal, the point estimate we observe will be within 1.96 standard errors of the true value of interest about 95% of the time.</p>
+<p><strong>Simple Linear Regression Model</strong> - 95% confidence intervals for all point estimates</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Intercept</th>
+<th>Average PM 2.5 (B1)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.4, 1.33</td>
+<td>-0.02, 0.08</td>
+</tr>
+</tbody>
+</table>
+<p>We can be 95% confident that the interval between 0.4% and 1.33% captures the true value of the intercept— the value of COVID deaths as a percent of cases when the concentration of PM 2.5 is 0 micrograms / cubic meter.</p>
+<p>We can also be 95% confident that the interval between -0.02% and 0.08% captures the true value of B1 — the percent change in COVID deaths as a percent of cases that a 1 unit increase in PM 2.5 will cause.</p>
+<p><strong>Interaction Model</strong> - 95% confidence intervals for all point estimates</p>
+<table class="table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Intercept</th>
+<th>Average PM2.5 (B1)</th>
+<th>Poverty Level (B2)</th>
+<th>Average PM : Poverty Level (B3)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-0.8, 2.58</td>
+<td>-0.18, 0.18</td>
+<td>-0.11, 0.12</td>
+<td>-0.01, 0.01</td>
+</tr>
+</tbody>
+</table>
+<p>Again, for the interaction model, we can be 95% confident that the intervals in the table above contain the true values for each of our point estimates.</p>
+<p>B1, B2, and B3 indicate that our model is quite unsure of the effects that each variable will have on COVID mortality.</p>
+</section>
+</section>
+<section id="further-research" class="level2">
+<h2 class="anchored" data-anchor-id="further-research">Further Research</h2>
+<p>There was a very similar study done by researchers at the Harvard T.H. Chan School of Public Health<span class="citation" data-cites="wu2020b">(<a href="#ref-wu2020b" role="doc-biblioref">Wu 2020b</a>)</span> which examined the relationship between PM 2.5 and COVID-19 mortality rates across counties in the United States. They found that an increase of PM 2.5 by 1 microgram per cubic meter was associated with an 11% increase in COVID-19 mortality in that county. This research involved accounting for many different confounding variables that could affect COVID-19 mortality rates.</p>
+<p>To more rigorously analyze PM 2.5’s relationship with COVID-19 mortality in California, I would account for additional variables such as other county level health metrics, number of hospital beds, and other environmental factors that could influence air quality. I would also consider studying city- or ZIP code- level data to achieve a higher spatial resolution.</p>
+<p>While area-level data can not be used to determine outcomes for individual patients, a more rigorous analysis would be able to inform policy decisions in local governments and resource allocations.</p>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-airpoll" class="csl-entry" role="doc-biblioentry">
+<span>“Air Pollution and Health.”</span> n.d. <a href="https://unece.org/air-pollution-and-health">https://unece.org/air-pollution-and-health</a>.
+</div>
+<div id="ref-kinney2008" class="csl-entry" role="doc-biblioentry">
+Kinney, Patrick. 2008. <span>“Climate Change, Air Quality, and Human Health.”</span> <em>American Journal of Preventative Medicine</em> 35 (5): 459–67. https://doi.org/<a href="https://doi.org/10.1016/j.amepre.2008.08.025">https://doi.org/10.1016/j.amepre.2008.08.025</a>.
+</div>
+<div id="ref-wu2020" class="csl-entry" role="doc-biblioentry">
+Wu, X. 2020a. <span>“Air Pollution and COVID-19 Mortality in the United States: Strengths and Limitations of an Ecological Regression Analysis.”</span> <em>Science Advances</em> 6 (45). https://doi.org/<a href="https://doi.org/10.1126/sciadv.abd4049">https://doi.org/10.1126/sciadv.abd4049</a>.
+</div>
+<div id="ref-wu2020b" class="csl-entry" role="doc-biblioentry">
+———. 2020b. <span>“Air Pollution and COVID-19 Mortality in the United States: Strengths and Limitations of an Ecological Regression Analysis.”</span> <em>Science Advances</em> 6 (45). https://doi.org/<a href="https://doi.org/10.1126/sciadv.abd4049">https://doi.org/10.1126/sciadv.abd4049</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{allison2022,
+  author = {Jillian Allison},
+  title = {Air {Quality} and {COVID-19} {Mortality} in {California}},
+  date = {2022-12-05},
+  url = {https://jilliannallison.github.io/posts/2022-12-05-covid-air-quality},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-allison2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Jillian Allison. 2022. <span>“Air Quality and COVID-19 Mortality in
+California.”</span> December 5, 2022. <a href="https://jilliannallison.github.io/posts/2022-12-05-covid-air-quality">https://jilliannallison.github.io/posts/2022-12-05-covid-air-quality</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
