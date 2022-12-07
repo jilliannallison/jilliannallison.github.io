@@ -167,3 +167,5 @@ There was a very similar study done by researchers at the Harvard T.H. Chan Scho
 To more rigorously analyze PM 2.5's relationship with COVID-19 mortality in California, I would account for additional variables such as other county level health metrics, number of hospital beds, and other environmental factors that could influence air quality. I would also consider studying city- or ZIP code- level data to achieve a higher spatial resolution.
 
 While area-level data can not be used to determine outcomes for individual patients, a more rigorous analysis would be able to inform policy decisions in local governments and resource allocations.
+
+**Affiliated GitHub Repository: https://github.com/jilliannallison/final_project**
